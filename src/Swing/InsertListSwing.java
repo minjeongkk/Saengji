@@ -21,7 +21,7 @@ public class InsertListSwing extends JFrame {
         jPanel.add(btn_expense);
 
         c.add(jPanel);
-        setSize(300, 350);
+        setSize(350, 200);
 
 
         Dimension frameSize = getSize();

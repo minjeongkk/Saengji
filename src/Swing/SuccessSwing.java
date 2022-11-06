@@ -22,23 +22,26 @@ public class SuccessSwing extends JFrame {
         //Panel 2
         JPanel jp2 = new JPanel();
         JButton btn_add = new JButton("추가 등록");
-        JButton btn_main = new JButton("메인 메뉴");
         jp2.add(btn_add);
-        jp2.add(btn_main);
 
         btn_add.addActionListener(new MyActionListener());
-        btn_main.addActionListener(new MyActionListener());
+
+        //Panel 3
+        JPanel jp3 = new JPanel();
+        JButton btn_close = new JButton("확인");
+        jp3.add(btn_close);
+        btn_close.addActionListener(new MyActionListener());
 
         c.add(jp1);
         c.add(jp2);
-        setSize(300, 350);
+        c.add(jp3);
+        setSize(350, 150);
 
         Dimension frameSize = getSize();
 
         Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((windowSize.width - frameSize.width) / 2,
                 (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         setVisible(true);
 
@@ -50,8 +53,8 @@ public class SuccessSwing extends JFrame {
                 new InsertListSwing();
                 setVisible(false);
             }
-            else{
-                // 메인 화면으로 돌아가기
+            if (b.getText().equals("확인")){
+                setVisible(false);
             }
         }
     }

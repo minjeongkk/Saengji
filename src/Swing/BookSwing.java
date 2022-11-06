@@ -255,7 +255,8 @@ public class BookSwing extends CalendarDataManager{
         JButton b3 = new JButton("목표 설정");
         bt3.add(b3);
 
-        bt1.setSize(150,20);
+        b1.addActionListener(new BookSwing.changeStatistic());
+        bt1.setSize(150,10);
 
         b2.addActionListener(new BookSwing.changeAccount());
         bt2.setSize(150,10);
@@ -385,6 +386,7 @@ public class BookSwing extends CalendarDataManager{
     class changeStatistic implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
+            new StatisticSwing();
         }
     }
 

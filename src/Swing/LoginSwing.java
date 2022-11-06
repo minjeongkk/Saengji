@@ -74,6 +74,12 @@ public class LoginSwing extends JFrame {
         c.add(bt2);
 
         setSize(300,350);
+        Dimension frameSize = getSize();
+
+        Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation((windowSize.width - frameSize.width) / 2,
+                (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
+
         setVisible(true);
 
     }
@@ -90,7 +96,7 @@ public class LoginSwing extends JFrame {
             UserJdbc userJdbc = new UserJdbc();
             int result = userJdbc.login(userID_, userPW_); // 성공 1 실패 0
             if(result == 1){
-                JOptionPane.showMessageDialog(null,"로그인 성공!.","Messeage",JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null,"로그인 성공!","Messeage",JOptionPane.PLAIN_MESSAGE);
                 new BookSwing();
                 setVisible(false);
             }

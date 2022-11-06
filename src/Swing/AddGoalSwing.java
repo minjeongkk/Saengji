@@ -92,6 +92,11 @@ public class AddGoalSwing extends JFrame{
         c.add(p4);
         c.add(p5);
         setSize(350,350);
+        Dimension frameSize = getSize();
+
+        Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation((windowSize.width - frameSize.width) / 2,
+                (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
         setVisible(true);
 
     }

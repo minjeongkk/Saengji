@@ -87,6 +87,12 @@ public class SignUpSwing extends JFrame {
         c.add(p3);
         c.add(p4);
         setSize(300,350);
+        Dimension frameSize = getSize();
+
+        Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation((windowSize.width - frameSize.width) / 2,
+                (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
+
         setVisible(true);
 
     }
