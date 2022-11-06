@@ -1,6 +1,8 @@
 package JDBC;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,95 +15,127 @@ public class MenuJDBC {
     public static void addExpense(Integer userId, Integer expense, Date expenseDate,
                                   String content, String category, Integer accountId){
 
-        String sqlInsert_expense = "INSERT INTO saengji.expense(userId, expense, expenseDate, content, category, accountId)"
+        //for insert a new expense
+        ResultSet rs = null;
+        int nowAmount = 0;
+        int result = 1;
+
+        String sql_select = "SELECT amount from account WHERE ID = ?";
+
+        String sql_insert = "INSERT INTO saengji.expense(userId, expense, expenseDate, content, category, accountId)"
                 + "VALUES(?,?,?,?,?,?)";
 
-        Connection conn2 = null;
+        String sql_account = "UPDATE account " +
+                "SET amount = ? "+
+                "WHERE ID=?";
 
-        try (Connection conn = JDBC_Util.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sqlInsert_expense);
-        ){
 
-            conn.setAutoCommit(false);
+        try{
+            Connection conn = JDBC_Util.getConnection();
 
-            conn2 = conn;
-
-            pstmt.setInt(1, userId);
-            pstmt.setInt(2, expense);
-            pstmt.setDate(3, expenseDate);
-            pstmt.setString(4, content);
-            pstmt.setString(5, category);
-            pstmt.setInt(6, accountId);
-
-            int rowAffected = pstmt.executeUpdate();
-
-            if(rowAffected == 1) {
-                conn.commit();
+            //현재 잔액 가져오기
+            PreparedStatement pstmt0 = conn.prepareStatement(sql_select, Statement.RETURN_GENERATED_KEYS);
+            pstmt0.setInt(1, accountId);
+            rs = pstmt0.executeQuery();
+            while(rs.next()) {
+                nowAmount = rs.getInt("amount");
             }
-            else {
+
+            //insert new income
+            conn.setAutoCommit(false);
+            PreparedStatement pstmt1 = conn.prepareStatement(sql_insert, Statement.RETURN_GENERATED_KEYS);
+
+            pstmt1.setInt(1, userId);
+            pstmt1.setInt(2, expense);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            pstmt1.setDate(3,Date.valueOf(df.format(expenseDate)));
+            pstmt1.setString(4,content);
+            pstmt1.setString(5,category);
+            pstmt1.setInt(6,accountId);
+
+            //update account
+            PreparedStatement pstmt2 = conn.prepareStatement(sql_account, Statement.RETURN_GENERATED_KEYS);
+            pstmt2.setInt(1,nowAmount-expense);
+            pstmt2.setInt(2,accountId);
+
+            int rowAffected1 = pstmt1.executeUpdate();
+            int rowAffected2 = pstmt2.executeUpdate();
+            if(rowAffected1 == 1 && rowAffected2 == 1) {
+                // get candidate id
+                rs = pstmt1.getGeneratedKeys();
+                if(rs.next())
+                    result= rs.getInt(1);
+                conn.commit();
+            }else{
                 conn.rollback();
             }
-
-        } catch (SQLException ex) {
-            try{
-                if(conn2 != null)
-
-                    conn2.rollback();
-
-            }catch(SQLException e){
-                System.out.println(e.getMessage());
-            }
-
-            System.out.println(ex.getMessage());
-
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
     }
+
 
 
     // Income 추가
     public static void addIncome(Integer userId, Integer income, Date incomeDate,
                                  String content, String category, Integer accountId){
 
-        String sqlInsert_income = "INSERT INTO saengji.income(userId, income, incomeDate, content, category, accountId)"
-                + "VALUES(?,?,?,?,?,?)";
+        // for insert a new income
+        ResultSet rs = null;
+        int nowAmount = 0;
+        int result = 1;
 
-        Connection conn2 = null;
+        String sql_select = "SELECT amount from account WHERE ID = ?";
 
-        try (Connection conn = JDBC_Util.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sqlInsert_income);
-        ){
+        String sql_insert = "INSERT INTO income(userId, income, incomeDate, content, category, accountId) "+
+                "VALUES(?,?,?,?,?,?)";
 
-            conn.setAutoCommit(false);
+        String sql_account = "UPDATE account " +
+                "SET amount = ? "+
+                "WHERE ID=?";
 
-            conn2 = conn;
 
-            pstmt.setInt(1, userId);
-            pstmt.setInt(2, income);
-            pstmt.setDate(3, incomeDate);
-            pstmt.setString(4, content);
-            pstmt.setString(5, category);
-            pstmt.setInt(6, accountId);
+        try{
+            Connection conn = JDBC_Util.getConnection();
 
-            int rowAffected = pstmt.executeUpdate();
-
-            if(rowAffected == 1) {
-                conn.commit();
+            //현재 잔액 가져오기
+            PreparedStatement pstmt0 = conn.prepareStatement(sql_select, Statement.RETURN_GENERATED_KEYS);
+            pstmt0.setInt(1, accountId);
+            rs = pstmt0.executeQuery();
+            while(rs.next()) {
+                nowAmount = rs.getInt("amount");
             }
-            else {
+
+            //insert new income
+            conn.setAutoCommit(false);
+            PreparedStatement pstmt1 = conn.prepareStatement(sql_insert, Statement.RETURN_GENERATED_KEYS);
+
+            pstmt1.setInt(1, userId);
+            pstmt1.setInt(2, income);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            pstmt1.setDate(3,Date.valueOf(df.format(incomeDate)));
+            pstmt1.setString(4,content);
+            pstmt1.setString(5,category);
+            pstmt1.setInt(6,accountId);
+
+            //update account
+            PreparedStatement pstmt2 = conn.prepareStatement(sql_account, Statement.RETURN_GENERATED_KEYS);
+            pstmt2.setInt(1,nowAmount+income);
+            pstmt2.setInt(2,accountId);
+
+            int rowAffected1 = pstmt1.executeUpdate();
+            int rowAffected2 = pstmt2.executeUpdate();
+            if(rowAffected1 == 1 && rowAffected2 == 1) {
+                // get candidate id
+                rs = pstmt1.getGeneratedKeys();
+                if(rs.next())
+                    result= rs.getInt(1);
+                conn.commit();
+            }else{
                 conn.rollback();
             }
-
-        } catch (SQLException ex) {
-            try{
-                if(conn2 != null)
-
-                    conn2.rollback();
-
-            }catch(SQLException e){
-                System.out.println(e.getMessage());
-            }
-
-            System.out.println(ex.getMessage());
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
     }
 
