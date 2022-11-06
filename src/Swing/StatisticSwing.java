@@ -27,6 +27,7 @@ public class StatisticSwing extends JFrame {
 
     public StatisticSwing() {
         //setTitle("통계 화면");
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         contentPane = getContentPane();
         row = new JPanel();
         row.setLayout(new GridBagLayout());
@@ -105,15 +106,14 @@ public class StatisticSwing extends JFrame {
 
         contentPane.add(row);
         setSize(350, 400);
-        setVisible(true);
-
-        //rePaint();
-
         Dimension frameSize = getSize();
 
         Dimension windowSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((windowSize.width - frameSize.width) / 2,
                 (windowSize.height - frameSize.height) / 2); //화면 중앙에 띄우기
+        setVisible(true);
+
+        //rePaint();
 
     }
 
@@ -257,7 +257,7 @@ public class StatisticSwing extends JFrame {
     }
     private void addLog(String log)
     {
-        rePaint();
+        //rePaint();
         txtLog.append(log+"\n\n");
 
     }
