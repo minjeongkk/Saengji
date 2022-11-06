@@ -115,6 +115,7 @@ public class GoalsSwing extends JFrame {
         }
         @Override
         public void actionPerformed(ActionEvent arg0){
+            setVisible(false);
             new AddGoalSwing();
         }
     }
@@ -128,6 +129,7 @@ public class GoalsSwing extends JFrame {
         public void actionPerformed(ActionEvent arg0){
             goalJdbc.deleteGoal();
             JOptionPane.showMessageDialog(null,"목표 삭제가 완료되었습니다.","Messeage",JOptionPane.PLAIN_MESSAGE);
+            setVisible(false);
             new GoalsSwing();
         }
     }

@@ -32,17 +32,17 @@ public class AddGoalSwing extends JFrame{
         //startYear
         JPanel p21 = new JPanel();
         p21.add(new JLabel("Year",Label.LEFT));
-        startYear = new JTextField("YYYY",5);
+        startYear = new JTextField("",5);
         p21.add(startYear);
         //startMonth
         JPanel p22 = new JPanel();
         p22.add(new JLabel("Month",Label.LEFT));
-        startMonth = new JTextField("MM",3);
+        startMonth = new JTextField("",3);
         p22.add(startMonth);
         //startDay
         JPanel p23 = new JPanel();
         p23.add(new JLabel("Day",Label.LEFT));
-        startDay = new JTextField("DD",3);
+        startDay = new JTextField("",3);
         p23.add(startDay);
         p2.add(p21);
         p2.add(p22);
@@ -55,17 +55,17 @@ public class AddGoalSwing extends JFrame{
         //startYear
         JPanel p31 = new JPanel();
         p31.add(new JLabel("Year",Label.LEFT));
-        endYear = new JTextField("YYYY",5);
+        endYear = new JTextField("",5);
         p31.add(endYear);
         //startMonth
         JPanel p32 = new JPanel();
         p32.add(new JLabel("Month",Label.LEFT));
-        endMonth = new JTextField("MM",3);
+        endMonth = new JTextField("",3);
         p32.add(endMonth);
         //startDay
         JPanel p33 = new JPanel();
         p33.add(new JLabel("Day",Label.LEFT));
-        endDay = new JTextField("DD",3);
+        endDay = new JTextField("",3);
         p33.add(endDay);
         p3.add(p31);
         p3.add(p32);
@@ -75,7 +75,7 @@ public class AddGoalSwing extends JFrame{
         //JPanel p4
         JPanel p4 = new JPanel();
         p4.add(new JLabel("목표 금액",Label.LEFT));
-        amount = new JTextField("목표 금액", 25);
+        amount = new JTextField("", 25);
         p4.add(amount);
         p4.setSize(350,50);
 
@@ -125,6 +125,7 @@ public class AddGoalSwing extends JFrame{
             GoalJdbc goalJdbc = new GoalJdbc();
             System.out.println(goalJdbc.saveGoal(new Goal(1, amount_, goalStartDate, goalEndDate)));
             JOptionPane.showMessageDialog(null,"목표 등록이 완료되었습니다.","Messeage",JOptionPane.PLAIN_MESSAGE);
+            setVisible(false);
             new GoalsSwing();
         }
     }

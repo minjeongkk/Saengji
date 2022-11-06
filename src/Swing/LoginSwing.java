@@ -40,14 +40,14 @@ public class LoginSwing extends JFrame {
         //ID JPanel
         JPanel ID = new JPanel();
         ID.add(new JLabel("아이디",Label.LEFT));
-        userID = new JTextField("아이디를 입력하세요", 20);
+        userID = new JTextField("", 20);
         ID.setBorder(BorderFactory.createEmptyBorder(5,10,0,0));
         ID.add(userID);
         ID.setSize(210,50);
 
         JPanel PW = new JPanel();
         PW.add(new JLabel("패스워드",Label.LEFT));
-        userPW = new JTextField("비밀번호를 입력하세요",20);
+        userPW = new JTextField("",20);
         PW.add(userPW);
         PW.setSize(210,50);
 

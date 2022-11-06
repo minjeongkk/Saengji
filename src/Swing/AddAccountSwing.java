@@ -28,15 +28,15 @@ public class AddAccountSwing extends JFrame {
         //JPanel p2
         JPanel p21 = new JPanel();
         p21.add(new JLabel("계좌번호",Label.LEFT));
-        accountNum = new JTextField("계좌번호",20);
+        accountNum = new JTextField("",20);
         p21.add(accountNum);
         JPanel p22 = new JPanel();
         p22.add(new JLabel("은행사",Label.LEFT));
-        bank = new JTextField("은행사",20);
+        bank = new JTextField("",20);
         p22.add(bank);
         JPanel p23 = new JPanel();
         p23.add(new JLabel("잔액",Label.LEFT));
-        balance = new JTextField("잔액",20);
+        balance = new JTextField("",20);
         p23.add(balance);
         p21.setSize(210,50);
         p22.setSize(210,50);

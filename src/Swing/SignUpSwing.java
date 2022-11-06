@@ -35,28 +35,28 @@ public class SignUpSwing extends JFrame {
         JPanel p21 = new JPanel();
         p21.setBorder(BorderFactory.createEmptyBorder(0,10,0,0));
         p21.add(new JLabel("아이디",Label.LEFT));
-        userID = new JTextField("아이디",20);
+        userID = new JTextField("",20);
         p21.add(userID);
 
         JPanel p22 = new JPanel();
         p22.add(new JLabel("패스워드",Label.LEFT));
-        userPW = new JTextField("패스워드",20);
+        userPW = new JTextField("",20);
         p22.add(userPW);
 
         JPanel p23 = new JPanel();
         p23.add(new JLabel("전화번호",Label.LEFT));
-        userPhone = new JTextField("전화번호",20);
+        userPhone = new JTextField("",20);
         p23.add(userPhone);
 
         JPanel p24 = new JPanel();
         p24.add(new JLabel("생년월일",Label.LEFT));
-        userBirth = new JTextField("YYYY-MM-DD",20);
+        userBirth = new JTextField("",20);
         p24.add(userBirth);
 
         JPanel p25 = new JPanel();
         p25.setBorder(BorderFactory.createEmptyBorder(5,20,0,0));
         p25.add(new JLabel("이름",Label.LEFT));
-        userName = new JTextField("이름",20);
+        userName = new JTextField("",20);
         p25.add(userName);
 
 
