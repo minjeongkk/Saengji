@@ -143,6 +143,7 @@ public class StatisticSwing extends JFrame {
             type_flag = flagNum;
             //txtLog.removeAll();
             //txtLog.repaint();
+            rePaint();
 
             if (date == null) {
                 addLog("날짜를 설정하세요.");
