@@ -31,7 +31,7 @@ public class StatisticJdbc {
         int month = Integer.parseInt(Month);
 
         int last_day;
-        if(month %2 ==0 && month!=8) {
+        if(month %2 !=0 && month!=8) {
             last_day = 30;
         }
         else {

@@ -151,7 +151,7 @@ public class StatisticSwing extends JFrame {
 
                 switch (period_flag) {
                     case 1:
-                        list = MenuJDBC.searchDaySum(1, Date.valueOf("2022-10-10"), Date.valueOf(date));
+                        list = MenuJDBC.searchDaySum(1, Date.valueOf(date), Date.valueOf(date));
                         if (type_flag == 1) {
                             for (int i = 0; i < list.size(); i++) {
                                 Map map = (Map) list.get(i);
