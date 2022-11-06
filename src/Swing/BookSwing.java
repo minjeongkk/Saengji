@@ -90,6 +90,7 @@ public class BookSwing extends CalendarDataManager{
     JLabel selectedDate;
     JPanel memoArea;
     JScrollPane memoAreaSP;
+    JPanel addB;
 
     JPanel frameBottomPanel;
 
@@ -209,11 +210,18 @@ public class BookSwing extends CalendarDataManager{
         memoPanel.setBorder(BorderFactory.createTitledBorder("Account book"));
         memoArea = new JPanel();
         memoArea.setLayout(new GridLayout(10,1));
+        addB = new JPanel();
+        addB.setSize(20,20);
+        JButton addBtn = new JButton("+");
+        addB.add(addBtn);
+        addBtn.addActionListener(new BookSwing.addBookList());
+        memoPanel.add(addB);
         memoAreaSP = new JScrollPane(memoArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         readMemo();
 
         memoPanel.setLayout(new BorderLayout());
         memoPanel.add(selectedDate, BorderLayout.NORTH);
+        memoPanel.add(addB,BorderLayout.AFTER_LINE_ENDS);
         memoPanel.add(memoAreaSP,BorderLayout.CENTER);
 
 
@@ -377,6 +385,13 @@ public class BookSwing extends CalendarDataManager{
     class changeStatistic implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
+        }
+    }
+
+    class addBookList implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new InsertListSwing();
         }
     }
 
