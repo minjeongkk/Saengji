@@ -236,20 +236,20 @@ public class BookSwing extends CalendarDataManager{
 
         frameBottomPanel = new JPanel();
         JPanel bt1 = new JPanel();
-        JButton b1=  new JButton("가계부");
+        JButton b1=  new JButton("통계");
         bt1.add(b1);
 
         JPanel bt2 = new JPanel();
-        JButton b2 = new JButton("통계");
+        JButton b2 = new JButton("계좌 설정");
         bt2.add(b2);
 
         JPanel bt3 = new JPanel();
-        JButton b3 = new JButton("마이페이지");
+        JButton b3 = new JButton("목표 설정");
         bt3.add(b3);
 
         bt1.setSize(150,20);
 
-//        b2.addActionListener(new BookSwing.change());
+        b2.addActionListener(new BookSwing.changeAccount());
         bt2.setSize(150,10);
 
         b3.addActionListener(new BookSwing.changeMyPage());
@@ -260,11 +260,11 @@ public class BookSwing extends CalendarDataManager{
         frameBottomPanel.add(bt2);
         frameBottomPanel.add(bt3);
 
-        mainFrame.setLayout(new GridLayout(2,1));
+//        mainFrame.setLayout(new GridLayout(3,1));
 
-        mainFrame.add(frameSubPanelWest);
-        mainFrame.add(frameSubPanelEast);
-        mainFrame.add(frameBottomPanel);
+        mainFrame.add(frameSubPanelWest,BorderLayout.NORTH);
+        mainFrame.add(frameSubPanelEast,BorderLayout.CENTER);
+        mainFrame.add(frameBottomPanel,BorderLayout.SOUTH);
         mainFrame.setVisible(true);
 
         focusToday();
@@ -377,6 +377,13 @@ public class BookSwing extends CalendarDataManager{
     class changeStatistic implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
+        }
+    }
+
+    class changeAccount implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            new AccountsSwing();
         }
     }
 

@@ -14,7 +14,6 @@ public class AddAccountSwing extends JFrame {
 
     public AddAccountSwing(){
         setTitle("계좌등록");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container c = getContentPane();
 
         setLayout(new FlowLayout(FlowLayout.CENTER));

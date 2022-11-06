@@ -22,7 +22,6 @@ public class AccountsSwing extends JFrame {
         accountList = accountJdbc.findAllAccounts();
 
         setTitle("계좌목록");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container c = getContentPane();
 
         setLayout(new FlowLayout(FlowLayout.CENTER));

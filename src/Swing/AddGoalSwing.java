@@ -15,7 +15,6 @@ public class AddGoalSwing extends JFrame{
 
     public AddGoalSwing(){
         setTitle("목표등록");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container c = getContentPane();
 
         setLayout(new FlowLayout(FlowLayout.CENTER));
