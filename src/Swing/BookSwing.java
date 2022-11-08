@@ -1,6 +1,7 @@
 package Swing;
 
 import JDBC.MenuJDBC;
+import JDBC.UserInfo;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -297,7 +298,14 @@ public class BookSwing extends CalendarDataManager{
             JTextField title = new JTextField(ti,150);
             memoArea.add(title);
             List readList = new ArrayList();
-            readList=menuJDBC.searchDayList(1,date,date);
+//            Integer userId = null;
+//            try {
+//                userId = UserInfo.getUser();
+//            } catch (IOException ex) {
+//                throw new RuntimeException(ex);
+//            }
+            Integer userId =1;
+            readList=menuJDBC.searchDayList(userId,date,date);
             if (readList!=null){
                 for(int i = 0; i < readList.size(); i ++){
                     Map map = (Map) readList.get(i);

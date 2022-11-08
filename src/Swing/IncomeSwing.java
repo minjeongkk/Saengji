@@ -1,10 +1,12 @@
 package Swing;
 
 import JDBC.MenuJDBC;
+import JDBC.UserInfo;
 
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.sql.*;
 
 public class IncomeSwing extends JFrame{
@@ -84,7 +86,12 @@ public class IncomeSwing extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             //이거 어케 설정하지? 지금 유저 아이디 어디서 가져와서 조회해야하나
-            Integer userId = 1;
+            Integer userId = null;
+            try {
+                userId = UserInfo.getUser();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             Integer income = Integer.valueOf(J_income.getText());
             Date incomeDate = Date.valueOf(J_incomeDate.getText());
             String content = J_content.getText();

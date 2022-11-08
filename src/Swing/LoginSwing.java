@@ -1,11 +1,13 @@
 package Swing;
 
 import JDBC.User.UserJdbc;
+import JDBC.UserInfo;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 
 public class LoginSwing extends JFrame {
@@ -88,12 +90,20 @@ public class LoginSwing extends JFrame {
         public Listener(JFrame f){
             frame=f;
         }
-        public void actionPerformed(ActionEvent arg0){
+        public void actionPerformed(ActionEvent arg0)  {
             String userID_ = userID.getText();
             String userPW_ = userPW.getText();
 
             //UserJDBC
             UserJdbc userJdbc = new UserJdbc();
+
+            try {
+                UserInfo.setUser(userID_);
+                System.out.println(UserInfo.getUser());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
             int result = userJdbc.login(userID_, userPW_); // 성공 1 실패 0
             if(result == 1){
                 JOptionPane.showMessageDialog(null,"로그인 성공!","Messeage",JOptionPane.PLAIN_MESSAGE);
