@@ -86,7 +86,6 @@ public class ExpenseSwing extends JFrame{
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            //이거 어케 설정하지? 지금 유저 아이디 어디서 가져와서 조회해야하나
             Integer userId = null;
             try {
                 userId = UserInfo.getUser();

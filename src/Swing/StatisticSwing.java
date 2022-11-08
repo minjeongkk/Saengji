@@ -2,6 +2,7 @@ package Swing;
 
 import JDBC.MenuJDBC;
 import JDBC.Statistic.StatisticJdbc;
+import JDBC.UserInfo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.Map;
 import java.util.List;
@@ -148,10 +150,16 @@ public class StatisticSwing extends JFrame {
             if (date == null) {
                 addLog("날짜를 설정하세요.");
             } else {
+                Integer userId = null;
+                try {
+                    userId = UserInfo.getUser();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
 
                 switch (period_flag) {
                     case 1:
-                        list = MenuJDBC.searchDaySum(1, Date.valueOf(date), Date.valueOf(date));
+                        list = MenuJDBC.searchDaySum(userId, Date.valueOf(date), Date.valueOf(date));
                         if (type_flag == 1) {
                             for (int i = 0; i < list.size(); i++) {
                                 Map map = (Map) list.get(i);
@@ -178,7 +186,7 @@ public class StatisticSwing extends JFrame {
                         addLog("서비스 준비중 입니다~");
                         break;
                     case 3:
-                        list = StatisticJdbc.monthCategory(1, date);
+                        list = StatisticJdbc.monthCategory(userId, date);
                         if (type_flag == 1) {
                             for (int i = 0; i < list.size(); i++) {
                                 Map map = (Map) list.get(i);
@@ -202,7 +210,7 @@ public class StatisticSwing extends JFrame {
                         }
                         break;
                     case 4:
-                        list = StatisticJdbc.yearCategory(1, date);
+                        list = StatisticJdbc.yearCategory(userId, date);
                         if (type_flag == 1) {
                             for (int i = 0; i < list.size(); i++) {
                                 Map map = (Map) list.get(i);

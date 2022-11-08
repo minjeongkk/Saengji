@@ -2,11 +2,13 @@ package Swing;
 
 import JDBC.Account.Account;
 import JDBC.Account.AccountJdbc;
+import JDBC.UserInfo;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class AddAccountSwing extends JFrame {
     JTextField accountNum, bank, balance, checkCredit;
@@ -97,7 +99,13 @@ public class AddAccountSwing extends JFrame {
 
             //AccountJdbc
             AccountJdbc accountJdbc = new AccountJdbc();
-            System.out.println(accountJdbc.saveAccount(new Account(accountNum_, bank_, balance_, checkCredit_, 1, 0)));
+            Integer userId = null;
+            try {
+                userId = UserInfo.getUser();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            System.out.println(accountJdbc.saveAccount(new Account(accountNum_, bank_, balance_, checkCredit_, userId, 0)));
             JOptionPane.showMessageDialog(null,"계좌 등록이 완료되었습니다.","Messeage",JOptionPane.PLAIN_MESSAGE);
         }
     }

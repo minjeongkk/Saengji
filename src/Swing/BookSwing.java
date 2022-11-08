@@ -113,7 +113,7 @@ public class BookSwing extends CalendarDataManager{
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setResizable(false);
         try{
-            UIManager.setLookAndFeel ("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");//LookAndFeel Windows ��Ÿ�� ����
+            UIManager.setLookAndFeel ("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             SwingUtilities.updateComponentTreeUI(mainFrame) ;
         }catch(Exception e){
         }
@@ -298,13 +298,13 @@ public class BookSwing extends CalendarDataManager{
             JTextField title = new JTextField(ti,150);
             memoArea.add(title);
             List readList = new ArrayList();
-//            Integer userId = null;
-//            try {
-//                userId = UserInfo.getUser();
-//            } catch (IOException ex) {
-//                throw new RuntimeException(ex);
-//            }
-            Integer userId =1;
+            Integer userId = null;
+            try {
+                userId = UserInfo.getUser();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
             readList=menuJDBC.searchDayList(userId,date,date);
             if (readList!=null){
                 for(int i = 0; i < readList.size(); i ++){
@@ -401,6 +401,7 @@ public class BookSwing extends CalendarDataManager{
     class addBookList implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
+            mainFrame.setVisible(false);
             new InsertListSwing();
         }
     }

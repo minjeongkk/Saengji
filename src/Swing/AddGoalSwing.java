@@ -2,11 +2,13 @@ package Swing;
 
 import JDBC.Goal.Goal;
 import JDBC.Goal.GoalJdbc;
+import JDBC.UserInfo;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -123,7 +125,13 @@ public class AddGoalSwing extends JFrame{
             Date goalEndDate = cal.getTime();
 
             GoalJdbc goalJdbc = new GoalJdbc();
-            System.out.println(goalJdbc.saveGoal(new Goal(1, amount_, goalStartDate, goalEndDate)));
+            Integer userId = null;
+            try {
+                userId = UserInfo.getUser();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            System.out.println(goalJdbc.saveGoal(new Goal(userId, amount_, goalStartDate, goalEndDate)));
             JOptionPane.showMessageDialog(null,"목표 등록이 완료되었습니다.","Messeage",JOptionPane.PLAIN_MESSAGE);
             setVisible(false);
             new GoalsSwing();

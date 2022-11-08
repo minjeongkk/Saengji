@@ -54,6 +54,7 @@ public class SuccessSwing extends JFrame {
                 setVisible(false);
             }
             if (b.getText().equals("확인")){
+                new BookSwing();
                 setVisible(false);
             }
         }
